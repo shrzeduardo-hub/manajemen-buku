@@ -1,66 +1,199 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Aplikasi Manajemen Buku
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi Manajemen Buku adalah aplikasi berbasis web yang dikembangkan menggunakan Laravel 10. Aplikasi ini dibuat untuk memenuhi tugas individu mata kuliah Pemrograman Web Lanjut dengan menerapkan Laravel Breeze sebagai sistem authentication dan Spatie Laravel Permission untuk pengelolaan role dan permission.
 
-## About Laravel
+Aplikasi memiliki tiga jenis pengguna, yaitu Admin, Dosen, dan Mahasiswa. Setiap pengguna memiliki hak akses berbeda sesuai dengan role yang dimiliki.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Fitur Aplikasi
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Registrasi akun pengguna.
+- Login dan logout.
+- Dashboard pengguna.
+- Menampilkan daftar buku.
+- Menambahkan data buku.
+- Mengedit data buku.
+- Menghapus data buku.
+- Mengelola role pengguna oleh Admin.
+- Pembatasan akses berdasarkan role dan permission.
+- Proteksi route dan pemeriksaan hak akses di sisi server.
+- Penolakan akses menggunakan HTTP 403 Forbidden bagi pengguna yang tidak memiliki izin.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Teknologi yang Digunakan
 
-## Learning Laravel
+| Teknologi | Keterangan |
+|---|---|
+| PHP | Bahasa pemrograman |
+| Laravel 10 | Framework backend |
+| Laravel Breeze 1.29 | Authentication |
+| Spatie Permission 6.0 | Role dan permission |
+| MySQL | Database |
+| Bootstrap 5 | Framework tampilan |
+| Composer | Pengelolaan dependensi PHP |
+| Node.js dan NPM | Pengelolaan aset frontend |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Role dan Hak Akses
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+| Fitur | Admin | Dosen | Mahasiswa |
+|---|:---:|:---:|:---:|
+| Login dan Logout | ✓ | ✓ | ✓ |
+| Melihat Buku | ✓ | ✓ | ✓ |
+| Menambahkan Buku | ✓ | ✓ | ✗ |
+| Mengedit Buku | ✓ | ✓ | ✗ |
+| Menghapus Buku | ✓ | ✗ | ✗ |
+| Mengelola Role Pengguna | ✓ | ✗ | ✗ |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Pembatasan hak akses diterapkan melalui pemeriksaan permission di sisi server. Penyembunyian tombol pada tampilan hanya digunakan sebagai pengaturan antarmuka, bukan sebagai satu-satunya mekanisme keamanan.
 
-## Laravel Sponsors
+## Struktur Database
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Aplikasi menggunakan tabel berikut:
 
-### Premium Partners
+- `users`: menyimpan data pengguna.
+- `books`: menyimpan data buku.
+- `roles`: menyimpan data role.
+- `permissions`: menyimpan daftar permission.
+- Tabel relasi Spatie: menghubungkan pengguna, role, dan permission.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Tabel `books` memiliki kolom:
 
-## Contributing
+- `id`
+- `title`
+- `author`
+- `publisher`
+- `published_year`
+- `created_at`
+- `updated_at`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Persyaratan Sistem
 
-## Code of Conduct
+Pastikan perangkat sudah memiliki:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- PHP 8.1 atau lebih baru.
+- Composer.
+- MySQL atau MariaDB.
+- Node.js dan NPM.
+- Git.
 
-## Security Vulnerabilities
+## Cara Instalasi
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1. Clone Repository
 
-## License
+```bash
+git clone https://github.com/shrzeduardo-hub/manajemen-buku.git
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Masuk ke folder project:
+
+```bash
+cd manajemen-buku
+```
+
+### 2. Instal Dependensi PHP
+
+```bash
+composer install
+```
+
+### 3. Konfigurasi Environment
+
+Salin file `.env.example` menjadi `.env`.
+
+Untuk Windows Command Prompt:
+
+```bash
+copy .env.example .env
+```
+
+Buat application key:
+
+```bash
+php artisan key:generate
+```
+
+### 4. Konfigurasi Database
+
+Buat database MySQL dengan nama:
+
+```text
+manajemen_buku
+```
+
+Kemudian sesuaikan konfigurasi database di file `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=manajemen_buku
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Sesuaikan username dan password dengan konfigurasi MySQL masing-masing.
+
+### 5. Jalankan Migration dan Seeder
+
+```bash
+php artisan migrate --seed
+```
+
+Perintah tersebut akan membuat tabel database dan mengisi data role, permission, serta akun pengujian.
+
+### 6. Instal Aset Frontend
+
+```bash
+npm install
+```
+
+Kemudian jalankan:
+
+```bash
+npm run build
+```
+
+### 7. Jalankan Aplikasi
+
+```bash
+php artisan serve
+```
+
+Buka aplikasi melalui browser:
+
+```text
+http://127.0.0.1:8000
+```
+
+## Akun Pengujian
+
+Aplikasi menyediakan tiga akun pengujian yang dibuat melalui database seeder.
+
+| Role | Email | Password |
+|---|---|---|
+| Admin | admin@gmail.com | password123 |
+| Dosen | dosen@gmail.com | password123 |
+| Mahasiswa | mahasiswa@gmail.com | password123 |
+
+**Catatan:** Akun tersebut hanya digunakan untuk pengujian lokal. Jangan gunakan password demo untuk lingkungan produksi.
+
+## Pengujian Hak Akses
+
+Pengujian dilakukan menggunakan ketiga akun untuk memastikan pembatasan akses berjalan sesuai ketentuan.
+
+Hasil yang diharapkan:
+
+1. Admin dapat melakukan seluruh operasi pengelolaan buku dan role pengguna.
+2. Dosen dapat melihat, menambahkan, dan mengedit buku.
+3. Mahasiswa hanya dapat melihat daftar buku.
+4. Pengguna tanpa permission menerima respons HTTP 403 ketika mencoba mengakses fitur yang dibatasi.
+5. Pengguna yang belum login diarahkan ke halaman login.
+6. Setelah logout, pengguna tidak dapat mengakses kembali halaman terlindungi melalui sesi sebelumnya.
+
+## Repository GitHub
+
+Source code aplikasi dapat diakses melalui:
+
+https://github.com/shrzeduardo-hub/manajemen-buku
+
+---
+
+**Dikembangkan sebagai tugas individu mata kuliah Pemrograman Web Lanjut.**
